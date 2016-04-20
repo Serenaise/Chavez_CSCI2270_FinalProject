@@ -1,1 +1,4 @@
 # Chavez_CSCI2270_FinalProject
+
+In my final project I will be working alone. I have decided to implement the use of linked lists and possibly a binary search tree to create a course registration system for the CU Boulder Computer Science department. I will attempt to make it where the user will be able to provide what class they would like to enroll in and they will be able to see if the class is full or not, who is enrolled and a description of the course. I will be using a predefined set of data to initialize the course registration system with some dummy information of fake students that are already enrolled, the user can then feel like the system is more realistic. I plan on making a administrator access menu function in order to have some sort of power in the program which can call for the use of deleting and other functions not available to the typical user.
+The end.....
