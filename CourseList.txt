@@ -1,0 +1,7 @@
+CSCI,1240,The Computational World,200,TBA,OnlineClass,Michael Eisenberg,42,3
+CSCI,1300,Computer Science 1 : StartingComputing,300,M-Th(2:30-3:50),ECCR-135,Jason Zietz,19,4
+CSCI,1300,Computer Science 1 : StartingComputing,310,M-Th(9:15-10:35),FLMG-156,Shirly Montero Quesada,24,4 
+CSCI,2270,Computer Science 2 : Data Structures,310,M-Th(2:30-3:50),ECCR 155,Samantha Molnar,12,4 
+CSCI,2270,Computer Science 2 : Data Structures,320,M-Th(1:00-2:20),ECCR 211,Frank Miller,0,4 
+CSCI,2400,Computer Systems,300,M-Th(9:15-10:35),ECCR 150,John Klinger,2,4 
+CSCI,2824,Discrete Structures,300,M-Fr(11:00-12:00),ECCR 211,Theodore Martiny,0,3
