@@ -14,7 +14,7 @@
 using namespace std;
 
 int main(int argc, const char * argv[]) {
-    
+
     int option;
     int input;
     int sect11;
@@ -26,20 +26,28 @@ int main(int argc, const char * argv[]) {
     string drop;
     string sect;
     string search;
-    
+
     Project inst;
     inst.readandAddCourse();
-    
+
     inst.printEntry();
     cin>>input;
+    while(cin.fail())
+    {//check input:make sure that the input is an int
+        cout << "Invalid Input. Please enter your ID number: "<<endl;
+        cin.clear();
+        cin.ignore(2147483647, '\n');
+        cout.flush();
+        cin >> input;
+    }//End check input
     cout<<"Please enter you full name."<<endl;
     cin.ignore();
     getline(cin,username);
     inst.insertID(input, username);
-    
+
     inst.printLogin();
     inst.printMenu();
-    
+
     while(cin>>option){
         if(option == 1){
             cout<<"Enter course number: "<<endl;
@@ -55,7 +63,9 @@ int main(int argc, const char * argv[]) {
         }
         if(option == 2){
             string majornow;
-            cout << "Enter the Course number and the section number of the class you want to drop:" << endl;
+            //Was:Enter the Course number and the section number of the class you want to drop
+            //Changed for clarity because they should only enter a course number here;
+            cout << "Enter the Course number of the class you want to drop:" << endl;
             cin.ignore();
             getline(cin, drop);
             cout<<"Enter the section number: "<<endl;
@@ -63,8 +73,9 @@ int main(int argc, const char * argv[]) {
             cout<<"Enter your major:"<<endl;
             cin.ignore();
             getline(cin,majornow);
-            
-            inst.drop(drop,sector,majornow);
+
+            inst.drop(drop,sector,majornow);//Modified the drop function so that they can only drop classes that exist
+            //It no longer seg faults when invalid classes are put in.
             inst.printMenu();
         }
         if(option == 3){
@@ -98,17 +109,17 @@ int main(int argc, const char * argv[]) {
                     string roomNo;
                     int credithrs;
                     int seatsaval;
-                    
+
                     if(adminOp == 1){
                         string classto;
                         int sectionto;
-                        
+
                         cout<<"Enter the course number: "<<endl;
                         cin.ignore();
                         getline(cin,classto);
                         cout<<"Now enter the section number: "<<endl;
                         cin>>sectionto;
-                        
+
                         inst.adminEnroll(classto, sectionto);
                         inst.adminMenu();
                     }
@@ -133,7 +144,7 @@ int main(int argc, const char * argv[]) {
                         cin>>credithrs;
                         inst.createClass(name, sectionNo, courseNo, teachername, timeat, roomNo, seatsaval, credithrs);
                         inst.adminMenu();
-                        
+
                     }
                     if(adminOp == 3){
                         inst.dropID();
@@ -156,6 +167,6 @@ int main(int argc, const char * argv[]) {
             break;
         }
     }
-    
+
     return 0;
 }

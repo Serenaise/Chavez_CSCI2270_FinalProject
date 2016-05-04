@@ -82,7 +82,7 @@ void Project::printTableContents(){
 
 void Project::enroll(string course, int section, string major){
     Course1* tmp = findClass(course, section);
-    
+
     int iSecret = rand() % 100000 + 1;
     if(tmp!= NULL){
         if(tmp -> seats != 0 && major == "CSCI"){
@@ -103,7 +103,7 @@ void Project::enroll(string course, int section, string major){
     else if (tmp == NULL){
         cout<<"Class Does not exist"<<endl;
     }
-   
+
 }
 
 
@@ -134,6 +134,10 @@ void Project::adminEnroll(string course, int section){
 void Project::drop(string course, int sector, string major){
     int index = hashSum(course, tableSize);
     Course1 *tmp = hashTable[index];
+    Course1 *verify = findClass(course,sector);/*Added to check to make sure
+    that the course that they are trying to drop actually exists*/
+    if (verify != NULL)//If the course is found in the list of courses.
+    {
         if(tmp -> waitlist != 0 && tmp -> enrolled == true){
             tmp -> waitlist = tmp -> waitlist - 1;
                     cout<<"You have succesfully dropped the class."<<" Available seats: "<<tmp -> seats<<" Waitlist total: "<<tmp->waitlist<<endl;
@@ -147,6 +151,7 @@ void Project::drop(string course, int sector, string major){
         else if(tmp -> enrolled == false){
             cout<<"you have not enrolled in this course."<<endl;
         }
+      }
 }
 
 
@@ -161,7 +166,7 @@ int Project::hashSum(string x, int s){    int sum = 0;
 Course1* Project::findClass(string name,int id){
         int index = hashSum(name,tableSize);
         Course1 *tmp;
-        
+
         if(hashTable[index] != NULL){
             tmp = hashTable[index];
             while(tmp != NULL){
@@ -184,7 +189,7 @@ Course1* Project::findClass(string name,int id){
 void Project::findCourses(string title,int sect){
     int index = hashSum(title,tableSize);
     Course1 *tmp;
-    
+
     if(hashTable[index] != NULL){
         tmp = hashTable[index];
         while(tmp != NULL){
@@ -204,7 +209,7 @@ void Project::findCourses(string title,int sect){
 
 void Project::createClass(string title, int section1, string course2,string name1, string time1, string location1,int seats1,int units1){
     int index = hashSum(course2, tableSize);
-    
+
     if (hashTable[index] == NULL){
         hashTable[index] = new Course1(title,section1,atoi(course2.c_str()),name1,time1,location1,seats1,units1);
     }
@@ -224,7 +229,7 @@ void Project::readandAddCourse(){
     string teacher;
     string availableSeats;
     string credits;
-    
+
     ifstream inFile;
     inFile.open("CourseList.txt");
     while(!inFile.eof()){
@@ -237,19 +242,19 @@ void Project::readandAddCourse(){
         getline(inFile,teacher,',');
         getline(inFile,availableSeats,',');
         getline(inFile,credits);
-        
-        
+
+
         int index = hashSum(course, tableSize);
-        
+
         if (hashTable[index] == NULL){
             hashTable[index] = new Course1(title,atoi(section.c_str()),atoi(course.c_str()),teacher,times,room,atoi(availableSeats.c_str()),atoi(credits.c_str()));
-            
+
         }
         else{
             hashTable[index]->next = new Course1(title,atoi(section.c_str()),atoi(course.c_str()),teacher,times,room,atoi(availableSeats.c_str()),atoi(credits.c_str()));
             hashTable[index] -> next -> previous = hashTable[index];
                     }
 
-        
+
     }
 }
